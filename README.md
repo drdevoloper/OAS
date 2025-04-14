@@ -63,6 +63,9 @@ A dynamic web-based vehicle auction platform where users can register, add vehic
 
 ## Authors
 Barath Kumaran SB
+
 SRM Institute of Science and Technology
+
 Vijay TS
+
 SRM Institute of Science and Technology
