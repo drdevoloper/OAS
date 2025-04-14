@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Admin Dashboard</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Vehicle</th>
+                    <th>Owner</th>
+                    <th>End Date</th>
+                    <th>Top Bid</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicle in vehicles %}
+                <tr>
+                    <td>{{ vehicle.vehicle_name }}</td>
+                    <td>{{ vehicle.name }}</td>
+                    <td>{{ vehicle.bid_end }}</td>
+                    <td>
+                        {% if vehicle.bids %}
+                            ₹{{ vehicle.bids[-1].amount }} by {{ vehicle.bids[-1].name }}
+                        {% else %}
+                            No Bids
+                        {% endif %}
+                    </td>
+                    <td>{{ "Expired" if vehicle.is_expired else "Active" }}</td>
+                    <td>
+                        <form action="/delete_vehicle/{{ vehicle._id }}" method="POST" style="display:inline;">
+                            <button type="submit">🗑 Delete</button>
+                        </form>
+                        <form action="/end_bid/{{ vehicle._id }}" method="POST" style="display:inline;">
+                            <button type="submit">🚫 End</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

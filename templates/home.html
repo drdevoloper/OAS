@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>OAS</title>
+        <link rel="stylesheet" href="../static/css/home.css">
+    </head>
+    <body>
+       <div class="nav_container">
+           <div class="nav">
+               <img src="../static/img/auc.png" class="photo">
+               <h1>WETRADE</h1>
+           </div>
+           <ol class="list">
+              <li class="item"><a href="{{ url_for('home') }}">HOME</a></li>
+              <li class="item"><a href="{{ url_for('add_page') }}">Add Vehicle</a></li>
+              <li class="item"><a href="{{ url_for('bid_vehicle') }}">BID VEHICLE</a></li>
+              <li class="item"><a href="{{ url_for('about') }}"> ABOUT US </a></li>
+              {% if vehicle %}
+                <li class="item"><a href="{{ url_for('checkout', vehicle_id=vehicle['_id']) }}">CHECKOUT</a></li>
+              {% else %}
+                <li class="item"><a href="{{ url_for('checkout') }}">CHECKOUT</a></li>
+              {% endif %}
+              <li class="item"><a href="../html/login.html"> LOGIN </a></li>
+           </ol>
+       </div>
+
+       <div class="carousel-container">
+        <div class="carousel">
+          <img src="../static/img/img1.jpg" class="carousel-image" alt="Image 1">
+          <img src="../static/img/img2.jpeg" class="carousel-image" alt="Image 2">
+          <img src="../static/img/img3.jpeg" class="carousel-image" alt="Image 3">
+        </div>
+        <button class="carousel-btn prev" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-btn next" onclick="nextSlide()">&#10095;</button>
+      </div>
+
+      <div class="dis">
+        <a href="{{ url_for('add_page') }}" class="but"> ADD VEHICLE </a>
+        <a href="{{ url_for('bid_vehicle') }}" class="but"> BID VEHICLE </a>
+       
+      </div>
+
+     <script src="../static/js/home.js"></script>
+    </body>
+</html>

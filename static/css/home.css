@@ -1,0 +1,224 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Navbar Container */
+.nav_container {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    background-color: antiquewhite;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Section */
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.photo {
+    height: 50px;
+    width: 50px;
+    margin-right: 15px;
+}
+
+h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+/* Navigation List */
+.list {
+    display: flex;
+    gap: 30px;
+    font-size: 20px;
+    align-items: center;
+}
+
+/* Individual Items */
+.item {
+    list-style: none;
+    text-decoration: none;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.item:hover {
+    background-color: #ebaa32;
+    color: #000;
+    cursor: pointer;
+    transform: translateY(-2px);
+}
+
+/* HOME */
+
+.carousel-container {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    margin: 50px auto;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 10px 15px 20px rgba(24, 23, 23, 0.2);
+  }
+  
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  
+  /* Navigation buttons */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+  }
+  
+  .carousel-btn:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+
+  .dis{
+    display: flex;
+    justify-content: space-between;
+    margin: 300px;
+  }
+
+  .but {
+    height: 60px;
+    width: 220px;
+    background-color: #ebaa32;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .but:hover {
+    background-color: #d49028;
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  /* about */
+
+  
+.about-container {
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .about-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 800px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    color: #fff;
+    animation: fadeIn 1.2s ease-in-out;
+  }
+  
+  .about-card h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #ebaa32;
+  }
+  
+  .about-card p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+  
+  .back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ebaa32;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s ease;
+  }
+  
+  .back-btn:hover {
+    background-color: #d49028;
+    transform: scale(1.05);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .about-card {
+      padding: 25px;
+    }
+  
+    .about-card h1 {
+      font-size: 28px;
+    }
+  
+    .about-card p {
+      font-size: 16px;
+    }
+  }
+
+  .card{
+    background: url('../img/bg.gif') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

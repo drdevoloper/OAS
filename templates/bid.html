@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="refresh" content="60">
+<head>
+    <title>OAS - Bidding</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bid.css') }}">
+</head>
+<body>
+<div class="nav_container">
+    <div class="nav">
+        <img src="{{ url_for('static', filename='img/auc.png') }}" class="photo">
+        <h1>WETRADE</h1>
+    </div>
+    <ol class="list">
+        <li class="item"><a href="{{ url_for('home') }}">HOME</a></li>
+        <li class="item"><a href="{{ url_for('add_page') }}">Add Vehicle</a></li>
+        <li class="item"><a href="{{ url_for('bid_vehicle') }}">BID VEHICLE</a></li>
+        <li class="item"><a href="{{ url_for('about') }}">ABOUT US</a></li>
+        {% if vehicle %}
+                <li class="item"><a href="{{ url_for('checkout', vehicle_id=vehicle['_id']) }}">CHECKOUT</a></li>
+              {% else %}
+                <li class="item"><a href="{{ url_for('checkout') }}">CHECKOUT</a></li>
+              {% endif %}
+    </ol>
+</div>
+
+<div class="full">
+    <div class="bid-container">
+        {% for vehicle in vehicles %}
+        <div class="vehicle-card" id="card-{{ loop.index }}">
+            <h1>{{ vehicle['vehicle_name'] }}</h1>
+            <div class="image-preview">
+                {% for img in vehicle['images'] %}
+                <img src="{{ '/' + img }}" alt="Vehicle Image">
+                {% endfor %}
+            </div>
+            <h3>₹{{ vehicle['price'] }}</h3>
+            <p><strong>Type:</strong> {{ vehicle['vehicle_type'] }}</p>
+            <p><strong>Brand:</strong> {{ vehicle['brand'] }}</p>
+            <p><strong>Description:</strong> {{ vehicle['about'] }}</p>
+            <p><strong>Owner:</strong> {{ vehicle['name'] }} | <strong>Phone:</strong> {{ vehicle['phone'] }}</p>
+            <p><strong>Bid Ends On:</strong> {{ vehicle['bid_end'] }}</p>
+            <p><strong>Posted On:</strong> 
+                {% if vehicle['created_at'] %}
+                    {{ vehicle['created_at'].strftime('%Y-%m-%d %H:%M:%S') }}
+                {% else %} N/A {% endif %}
+            </p>
+
+
+            {% if vehicle.is_expired %}
+            <div class="sold-box">
+                🏁 <strong>SOLD!</strong><br>
+                Winner: {{ vehicle.winner if vehicle.winner else 'No Bids' }}<br>
+                Amount: ₹{{ vehicle.winning_amount if vehicle.winning_amount else '0' }}<br>
+                <a href="/checkout">Go to Checkout</a>
+            </div>
+        {% else %}
+            <!-- Bidding Form -->
+            <form action="{{ url_for('submit_bid', vehicle_id=vehicle['_id']) }}" method="POST">
+                <input type="hidden" name="vehicle_id" value="{{ vehicle._id }}">
+                <input type="text" name="bidder_name" placeholder="Your Name">
+                <input type="number" name="amount" placeholder="Your Bid Amount" min="{{ vehicle['price'] + 1 }}" required>
+                <button type="submit">Place Bid</button>
+            </form>
+        {% endif %}
+        <!-- Bids Display -->
+        <div class="bids-display">
+            <h4>Live Bids:</h4>
+            {% for bid in vehicle.get('bids', []) %}
+            <div class="bid-card">
+                ₹{{ bid['amount'] }} - {{ bid['name'] }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+</body>
+</html>

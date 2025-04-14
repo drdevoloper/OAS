@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>OAS</title>
+        <link rel="stylesheet" href="../static/css/home.css">
+    </head>
+    <body>
+       <div class="nav_container">
+           <div class="nav">
+               <img src="../static/img/auc.png" class="photo">
+               <h1>WETRADE</h1>
+           </div>
+           <ol class="list">
+              <li class="item"><a href="{{ url_for('home') }}">HOME</a></li>
+              <li class="item"><a href="{{ url_for('add_page') }}">Add Vehicle</a></li>
+              <li class="item"><a href="{{ url_for('bid_vehicle') }}">BID VEHICLE</a></li>
+              <li class="item"><a href="{{ url_for('about') }}"> ABOUT US </a></li>
+              {% if vehicle %}
+                <li class="item"><a href="{{ url_for('checkout', vehicle_id=vehicle['_id']) }}">CHECKOUT</a></li>
+              {% else %}
+                <li class="item"><a href="{{ url_for('checkout') }}">CHECKOUT</a></li>
+              {% endif %}
+           </ol>
+       </div>
+    <div class="card">
+    <section class="about-container">
+    <div class="about-card">
+      <h1>About Us</h1>
+      <p>Welcome to our auction platform where innovation meets opportunity. Our mission is to create a transparent, fast, and secure online auction experience for everyone — from buyers to sellers.</p>
+      <p>Founded in 2025, we are passionate about combining technology and user-friendly design to build a seamless vehicle auction marketplace. Whether you're looking for a dream car or selling one, we've got your back!</p>
+      <p>Our team is made up of developers, designers, and auction enthusiasts dedicated to making bidding exciting and rewarding.</p>
+      <a href="{{ url_for('home') }}" class="btn">Go to Home</a>
+    </div>
+        </section>
+    </div>
+
+    </body>
+</html>

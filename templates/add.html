@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>OAS</title>
+        <link rel="stylesheet" href="../static/css/add.css">
+    </head>
+    <body>
+       <div class="nav_container">
+           <div class="nav">
+               <img src="../static/img/auc.png" class="photo">
+               <h1>WETRADE</h1>
+           </div>
+           <ol class="list">
+              <li class="item"><a href="{{ url_for('home') }}">HOME</a></li>
+              <li class="item"><a href="{{ url_for('add_page') }}">Add Vehicle</a></li>
+              <li class="item"><a href="{{ url_for('bid_vehicle') }}">BID VEHICLE</a></li>
+              <li class="item"><a href="{{ url_for('about') }}"> ABOUT US </a></li>
+              {% if vehicle %}
+                <li class="item"><a href="{{ url_for('checkout', vehicle_id=vehicle['_id']) }}">CHECKOUT</a></li>
+              {% else %}
+                <li class="item"><a href="{{ url_for('checkout') }}">CHECKOUT</a></li>
+              {% endif %}
+           </ol>
+        </div>
+        <div class="full">
+          <form class="card_container" action="/add_vehicle" method="POST" enctype="multipart/form-data">
+            <h2>Add Vehicle for Auction</h2>
+        
+            <div class="dis">
+                <label>Name:</label>
+                <input type="text" name="name" placeholder="Enter your Name" required>
+            </div>
+        
+            <div class="dis">
+                <label for="vehicleType">Vehicle Type:</label>
+                <select id="vehicleType" name="vehicle_type" required>
+                    <option value="" disabled selected>Select Vehicle Type</option>
+                    <option value="cycle">Cycle</option>
+                    <option value="bike">Bike</option>
+                    <option value="car">Car</option>
+                    <option value="van">Van</option>
+                    <option value="bus">Bus</option>
+                </select>
+            </div>
+        
+            <div class="dis">
+                <label for="vehicleBrand">Vehicle Brand:</label>
+                <select id="vehicleBrand" name="brand" required>
+                    <option value="" disabled selected>Select a Brand</option>
+                </select>
+            </div>
+        
+            <div class="dis">
+                <label>Vehicle Name:</label>
+                <input type="text" name="vehicle_name" placeholder="Enter your Vehicle Name" required>
+            </div>
+        
+            <div class="dis">
+                <label>About Vehicle:</label>
+                <textarea name="about" placeholder="Describe your vehicle" ></textarea>
+            </div>
+        
+            <div class="dis">
+                <label>Phone Number:</label>
+                <div class="phone">
+                    <span>+91</span>
+                    <input type="tel" name="phone" placeholder="Enter your phone number" required>
+                </div>
+            </div>
+        
+            <div class="dis">
+                <label>Base Price (₹):</label>
+                <input type="number" name="price" placeholder="Enter Base Price" required>
+            </div>
+        
+            <div class="dis">
+                <label>Bid End Date:</label>
+                <input type="datetime-local" name="bid_end" required step="1">
+            </div>
+        
+            <div class="file">
+                <label>Upload Images:</label>
+                <input type="file" name="images" accept="image/*" multiple required>
+                <p class="note">Image size should be between 100 to 150MB</p>
+            </div>
+        
+            <div class="submit_btn">
+                <button type="submit">Submit Vehicle</button>
+            </div>
+        </form>
+        
+        </div>
+    <script src="../static/js/home.js"></script>
+    </body>
+</html>
