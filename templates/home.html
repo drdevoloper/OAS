@@ -8,7 +8,7 @@
        <div class="nav_container">
            <div class="nav">
                <img src="../static/img/auc.png" class="photo">
-               <h1>WETRADE</h1>
+               <h1>Torque Rush</h1>
            </div>
            <ol class="list">
               <li class="item"><a href="{{ url_for('home') }}">HOME</a></li>
@@ -20,7 +20,7 @@
               {% else %}
                 <li class="item"><a href="{{ url_for('checkout') }}">CHECKOUT</a></li>
               {% endif %}
-              <li class="item"><a href="../html/login.html"> LOGIN </a></li>
+              <li class="item"><a href="{{ url_for('login') }}"> LOGIN </a></li>
            </ol>
        </div>
 

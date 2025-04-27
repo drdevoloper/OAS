@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - Torque Rush</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    /* Your original CSS (no major changes) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    video.bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .header {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .logo {
+      width: 70px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 30px;
+      color: white;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .register-container {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 50px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      width: 750px;
+      text-align: center;
+      color: #fff;
+      z-index: 1;
+      margin-right: 290px;
+    }
+
+    .register-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .register-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-field {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .input-field label {
+      font-size: 14px;
+      color: #eee;
+    }
+
+    .input-field input,
+    .input-field select {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .show-password {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #ddd;
+      margin-top: -10px;
+      margin-bottom: 15px;
+    }
+
+    .show-password input {
+      margin-right: 5px;
+    }
+
+    .register-button {
+      padding: 12px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .register-button:hover {
+      background-color: #45a049;
+    }
+
+    .footer-links {
+      margin-top: 20px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #90ee90;
+      font-size: 14px;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("../static/img/rebackground.gif");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #323232;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 16px;
+  }
+
+  #snackbar.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 3s;
+  }
+
+  @keyframes fadein {
+    from { bottom: 0; opacity: 0; }
+    to { bottom: 30px; opacity: 1; }
+  }
+
+  @keyframes fadeout {
+    from { bottom: 30px; opacity: 1; }
+    to { bottom: 0; opacity: 0; }
+  }
+
+  </style>
+</head>
+
+<body>
+
+<!-- 🔁 Background Video 
+<video class="gif" autoplay muted loop>
+  <source src="../static/image/rebackground.gif" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+-->
+<!-- Header -->
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div id="snackbar">{{ messages[0] }}</div>
+  {% else %}
+    <div id="snackbar"></div>
+  {% endif %}
+{% endwith %}
+
+<div class="header">
+  <img src="../static/img/auc.png" alt="Logo" class="logo" />
+  <div class="logo-text">Torque Rush</div>
+</div>
+
+<!-- Registration Form -->
+<div class="register-container">
+  <h2 class="register-title">Create an Account</h2>
+
+  <form method="POST" action="/register">
+    <div class="input-field">
+      <label for="role">Register as:</label>
+      <select id="role" name="role" required>
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+
+    <div class="input-field">
+      <label for="username">Gmail:</label>
+      <input type="text"  name="gmail" required placeholder="Enter a username" />
+    </div>
+
+    <div class="input-field">
+      <label for="username">Phone Number:</label>
+      <input type="text"  name="phno" required placeholder="Enter a username" />
+    </div>
+
+    <div class="input-field">
+      <label for="username">Create Username:</label>
+      <input type="text" id="username" name="username" required placeholder="Enter a username" />
+    </div>
+
+    <div class="input-field">
+      <label for="password">Create Password:</label>
+      <input type="password" id="password" name="password" required placeholder="Enter a password" />
+    </div>
+
+    <div class="input-field">
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm password" />
+    </div>
+
+    <div class="show-password">
+      <input type="checkbox" id="togglePassword" />
+      <label for="togglePassword">Show Password</label>
+    </div>
+
+    <button type="submit" class="register-button">Register</button>
+
+    <div class="footer-links">
+      <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.getElementById("togglePassword").addEventListener("change", function () {
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirm-password");
+    const type = this.checked ? "text" : "password";
+    password.type = type;
+    confirmPassword.type = type;
+  });
+
+  window.onload = function () {
+    var snackbar = document.getElementById("snackbar");
+    if (snackbar.textContent.trim() !== "") {
+      snackbar.className = "show";
+      setTimeout(function () {
+        snackbar.className = snackbar.className.replace("show", "");
+      }, 5000); 
+    }
+  };
+
+
+</script>
+
+</body>
+</html>

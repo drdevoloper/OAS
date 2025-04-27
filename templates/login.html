@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Torque Rush</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("../static/img/lobackground.gif");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .header {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .logo {
+      width: 70px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 30px;
+      color: white;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 50px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      width: 320px;
+      color: #fff;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .login-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-field {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .input-field label {
+      font-size: 14px;
+      color: #eee;
+    }
+
+    .input-field input,
+    .input-field select {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .login-button {
+      padding: 12px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-button:hover {
+      background-color: #45a049;
+    }
+
+    .footer-links {
+      margin-top: 20px;
+    }
+
+    .footer-links a {
+      color: #90ee90;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    #snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #323232;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 16px;
+  }
+
+  #snackbar.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 3s;
+  }
+
+  @keyframes fadein {
+    from { bottom: 0; opacity: 0; }
+    to { bottom: 30px; opacity: 1; }
+  }
+
+  @keyframes fadeout {
+    from { bottom: 30px; opacity: 1; }
+    to { bottom: 0; opacity: 0; }
+  }
+
+  </style>
+</head>
+
+<body>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div id="snackbar">{{ messages[0] }}</div>
+  {% else %}
+    <div id="snackbar"></div>
+  {% endif %}
+{% endwith %}
+
+  <!-- Header -->
+  <div class="header">
+    <img src="../static/img/auc.png" alt="Torque Rush Logo" class="logo" />
+    <div class="logo-text">Torque Rush</div>
+  </div>
+
+  <!-- Login Form -->
+  <div class="login-container">
+    <h2 class="login-title">Login Torque Rush</h2>
+
+    <form method="POST" action="{{ url_for('login') }}" class="login-form" id="login-form">
+      <div class="input-field">
+        <label for="role">Login as:</label>
+        <select id="role" name="role" required>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <div class="input-field">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required placeholder="Enter your username" />
+      </div>
+
+      <div class="input-field">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Enter your password" />
+      </div>
+
+      <button type="submit" class="login-button">Login</button>
+
+      <div class="footer-links">
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Sign Up</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    window.onload = function () {
+      var snackbar = document.getElementById("snackbar");
+      if (snackbar.textContent.trim() !== "") {
+        snackbar.className = "show";
+        setTimeout(function () {
+          snackbar.className = snackbar.className.replace("show", "");
+        }, 5000); 
+      }
+    };
+  </script>
+  
+</body>
+</html>

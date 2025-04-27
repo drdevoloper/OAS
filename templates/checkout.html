@@ -8,7 +8,7 @@
        <div class="nav_container">
            <div class="nav">
                <img src="../static/img/auc.png" class="photo">
-               <h1>WETRADE</h1>
+               <h1>Torque Rush</h1>
            </div>
            <ol class="list">
               <li class="item"><a href="{{ url_for('home') }}">HOME</a></li>
@@ -28,17 +28,22 @@
           {% if vehicle and vehicle['images'] %}
             <img src="{{ '/' + vehicle['images'][0] }}" alt="Winning Vehicle" class="winner-image">
           {% else %}
-            <img src="/path/to/default/image.jpg" alt="No Image Available" class="winner-image">
+            <img src="/static/img/default.jpg" alt="No Image Available" class="winner-image">
           {% endif %}
           <div class="winner-details">
-            <h2>🏆 Bidding Ended!</h2>
+            <h2>🏆 Bidding {{ 'Ended' if vehicle and vehicle.get('is_expired') else 'Still Active' }}</h2>
             <h3>{{ vehicle['vehicle_name'] if vehicle else 'Vehicle Not Found' }}</h3>
-            <p><strong>Winner:</strong> {{ vehicle['winner'] if vehicle and vehicle.get('winner') else 'No Bids' }}</p>
-            <p><strong>Amount:</strong> ₹{{ vehicle['winning_amount'] if vehicle and vehicle.get('winning_amount') else '0' }}</p>
+            {% if vehicle and vehicle.get('is_expired') %}
+              <p><strong>Winner:</strong> {{ vehicle['winner'] }}</p>
+              <p><strong>Amount:</strong> ₹{{ vehicle['winning_amount'] }}</p>
+            {% else %}
+              <p><em>This vehicle is still open for bidding.</em></p>
+            {% endif %}
             <a href="{{ url_for('home') }}" class="checkout-btn">Go to Home</a>
           </div>
         </div>
       </div>
+      
       
       
       <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>

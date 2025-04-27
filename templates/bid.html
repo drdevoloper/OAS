@@ -9,7 +9,7 @@
 <div class="nav_container">
     <div class="nav">
         <img src="{{ url_for('static', filename='img/auc.png') }}" class="photo">
-        <h1>WETRADE</h1>
+        <h1>Torque Rush</h1>
     </div>
     <ol class="list">
         <li class="item"><a href="{{ url_for('home') }}">HOME</a></li>
@@ -52,7 +52,7 @@
                 🏁 <strong>SOLD!</strong><br>
                 Winner: {{ vehicle.winner if vehicle.winner else 'No Bids' }}<br>
                 Amount: ₹{{ vehicle.winning_amount if vehicle.winning_amount else '0' }}<br>
-                <a href="/checkout">Go to Checkout</a>
+                <a href="{{ url_for('checkout', vehicle_id=vehicle['_id']) }}">Go to Checkout</a>
             </div>
         {% else %}
             <!-- Bidding Form -->
